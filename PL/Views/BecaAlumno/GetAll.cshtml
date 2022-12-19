@@ -1,0 +1,32 @@
+﻿@model ML.BecaAlumno
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Lista de Alumnos</h2>
+<div class="container">
+
+    <div class="row">
+        <div style="float:right">
+            @Html.ActionLink("Agregar beca", "Form", "BecaAlumno", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+
+    <hr />
+    @foreach (ML.BecaAlumno becaAlumno in Model.BecaAlunmos)
+    {
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Beca.Nombre)
+                    @Html.TextBoxFor(model => model.Beca.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                    @Html.ValidationMessageFor(model => model.Beca.Nombre)
+                </div>
+            </div>
+
+
+        </div>
+    }
+</div>
+
+

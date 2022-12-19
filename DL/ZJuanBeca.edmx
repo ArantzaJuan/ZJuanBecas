@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ZJuanBecaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="IdAlumno" />
+          </Key>
+          <Property Name="IdAlumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="50" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="50" />
+          <Property Name="Genero" Type="bit" />
+          <Property Name="Edad" Type="int" />
+        </EntityType>
+        <EntityType Name="Beca">
+          <Key>
+            <PropertyRef Name="IdBeca" />
+          </Key>
+          <Property Name="IdBeca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BecaAlumno">
+          <Key>
+            <PropertyRef Name="IdBecaAlumno" />
+          </Key>
+          <Property Name="IdBecaAlumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAlumno" Type="int" />
+          <Property Name="IdBeca" Type="int" />
+          <Property Name="IdBeca2" Type="int" />
+        </EntityType>
+        <Association Name="FK__BecaAlumn__IdAlu__2C3393D0">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+          <End Role="BecaAlumno" Type="Self.BecaAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="BecaAlumno">
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BecaAlumn__IdBec__2D27B809">
+          <End Role="Beca" Type="Self.Beca" Multiplicity="0..1" />
+          <End Role="BecaAlumno" Type="Self.BecaAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beca">
+              <PropertyRef Name="IdBeca" />
+            </Principal>
+            <Dependent Role="BecaAlumno">
+              <PropertyRef Name="IdBeca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BecaAlumn__IdBec__2E1BDC42">
+          <End Role="Beca" Type="Self.Beca" Multiplicity="0..1" />
+          <End Role="BecaAlumno" Type="Self.BecaAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beca">
+              <PropertyRef Name="IdBeca" />
+            </Principal>
+            <Dependent Role="BecaAlumno">
+              <PropertyRef Name="IdBeca2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ZJuanBecaModelStoreContainer">
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Beca" EntityType="Self.Beca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BecaAlumno" EntityType="Self.BecaAlumno" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BecaAlumn__IdAlu__2C3393D0" Association="Self.FK__BecaAlumn__IdAlu__2C3393D0">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="BecaAlumno" EntitySet="BecaAlumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BecaAlumn__IdBec__2D27B809" Association="Self.FK__BecaAlumn__IdBec__2D27B809">
+            <End Role="Beca" EntitySet="Beca" />
+            <End Role="BecaAlumno" EntitySet="BecaAlumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BecaAlumn__IdBec__2E1BDC42" Association="Self.FK__BecaAlumn__IdBec__2E1BDC42">
+            <End Role="Beca" EntitySet="Beca" />
+            <End Role="BecaAlumno" EntitySet="BecaAlumno" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZJuanBecaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="IdAlumno" />
+          </Key>
+          <Property Name="IdAlumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Genero" Type="Boolean" />
+          <Property Name="Edad" Type="Int32" />
+          <NavigationProperty Name="BecaAlumnoes" Relationship="ZJuanBecaModel.FK__BecaAlumn__IdAlu__2C3393D0" FromRole="Alumno" ToRole="BecaAlumno" />
+        </EntityType>
+        <EntityType Name="Beca">
+          <Key>
+            <PropertyRef Name="IdBeca" />
+          </Key>
+          <Property Name="IdBeca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BecaAlumnoes" Relationship="ZJuanBecaModel.FK__BecaAlumn__IdBec__2D27B809" FromRole="Beca" ToRole="BecaAlumno" />
+          <NavigationProperty Name="BecaAlumnoes1" Relationship="ZJuanBecaModel.FK__BecaAlumn__IdBec__2E1BDC42" FromRole="Beca" ToRole="BecaAlumno" />
+        </EntityType>
+        <EntityContainer Name="ZJuanBecaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumnoes" EntityType="Self.Alumno" />
+          <EntitySet Name="Becas" EntityType="Self.Beca" />
+          <EntitySet Name="BecaAlumnoes" EntityType="ZJuanBecaModel.BecaAlumno" />
+          <AssociationSet Name="FK__BecaAlumn__IdAlu__2C3393D0" Association="ZJuanBecaModel.FK__BecaAlumn__IdAlu__2C3393D0">
+            <End Role="Alumno" EntitySet="Alumnoes" />
+            <End Role="BecaAlumno" EntitySet="BecaAlumnoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BecaAlumn__IdBec__2D27B809" Association="ZJuanBecaModel.FK__BecaAlumn__IdBec__2D27B809">
+            <End Role="Beca" EntitySet="Becas" />
+            <End Role="BecaAlumno" EntitySet="BecaAlumnoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BecaAlumn__IdBec__2E1BDC42" Association="ZJuanBecaModel.FK__BecaAlumn__IdBec__2E1BDC42">
+            <End Role="Beca" EntitySet="Becas" />
+            <End Role="BecaAlumno" EntitySet="BecaAlumnoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BecaAlumno">
+          <Key>
+            <PropertyRef Name="IdBecaAlumno" />
+          </Key>
+          <Property Name="IdBecaAlumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAlumno" Type="Int32" />
+          <Property Name="IdBeca" Type="Int32" />
+          <Property Name="IdBeca2" Type="Int32" />
+          <NavigationProperty Name="Alumno" Relationship="ZJuanBecaModel.FK__BecaAlumn__IdAlu__2C3393D0" FromRole="BecaAlumno" ToRole="Alumno" />
+          <NavigationProperty Name="Beca" Relationship="ZJuanBecaModel.FK__BecaAlumn__IdBec__2D27B809" FromRole="BecaAlumno" ToRole="Beca" />
+          <NavigationProperty Name="Beca1" Relationship="ZJuanBecaModel.FK__BecaAlumn__IdBec__2E1BDC42" FromRole="BecaAlumno" ToRole="Beca" />
+        </EntityType>
+        <Association Name="FK__BecaAlumn__IdAlu__2C3393D0">
+          <End Type="ZJuanBecaModel.Alumno" Role="Alumno" Multiplicity="0..1" />
+          <End Type="ZJuanBecaModel.BecaAlumno" Role="BecaAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="BecaAlumno">
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BecaAlumn__IdBec__2D27B809">
+          <End Type="ZJuanBecaModel.Beca" Role="Beca" Multiplicity="0..1" />
+          <End Type="ZJuanBecaModel.BecaAlumno" Role="BecaAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beca">
+              <PropertyRef Name="IdBeca" />
+            </Principal>
+            <Dependent Role="BecaAlumno">
+              <PropertyRef Name="IdBeca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BecaAlumn__IdBec__2E1BDC42">
+          <End Type="ZJuanBecaModel.Beca" Role="Beca" Multiplicity="0..1" />
+          <End Type="ZJuanBecaModel.BecaAlumno" Role="BecaAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beca">
+              <PropertyRef Name="IdBeca" />
+            </Principal>
+            <Dependent Role="BecaAlumno">
+              <PropertyRef Name="IdBeca2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ZJuanBecaModelStoreContainer" CdmEntityContainer="ZJuanBecaEntities">
+          <EntitySetMapping Name="Alumnoes">
+            <EntityTypeMapping TypeName="ZJuanBecaModel.Alumno">
+              <MappingFragment StoreEntitySet="Alumno">
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Becas">
+            <EntityTypeMapping TypeName="ZJuanBecaModel.Beca">
+              <MappingFragment StoreEntitySet="Beca">
+                <ScalarProperty Name="IdBeca" ColumnName="IdBeca" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BecaAlumnoes">
+            <EntityTypeMapping TypeName="ZJuanBecaModel.BecaAlumno">
+              <MappingFragment StoreEntitySet="BecaAlumno">
+                <ScalarProperty Name="IdBeca2" ColumnName="IdBeca2" />
+                <ScalarProperty Name="IdBeca" ColumnName="IdBeca" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdBecaAlumno" ColumnName="IdBecaAlumno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
